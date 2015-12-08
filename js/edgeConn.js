@@ -62,13 +62,39 @@ function visualize(edges, toUpdate) {
   var getColor = d3.scale.ordinal().range(colorbrewer.Dark2[clubs.length])
     .domain(clubs);
 
-  link = link
-      .data(bundle(links))
-      .enter().append("path")
-      .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; })
-      .attr("class", "link")
-      .attr("d", line);
+  // data join
+  var linkWithData = link
+    .data(bundle(links));
 
+  // enter
+  linkWithData.enter().append("path")
+    .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; });
+
+  // update
+  linkWithData.attr("class", "link")
+    .attr("d", line);
+
+  // enter + update
+
+  // exit
+  linkWithData.exit().remove();
+
+//  link = link
+//      .data(bundle(links))
+//      .enter().append("path")
+//      .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; })
+//      .attr("class", "link")
+//      .attr("d", line);
+
+  // data join
+
+  // update
+
+  // enter
+
+  // enter + update
+
+  // exit
   svg.selectAll("g.node-dot")
     .data(nodes.filter(function(n) { return !n.children; }))
     .enter().append("svg:g")
@@ -82,6 +108,15 @@ function visualize(edges, toUpdate) {
     .on("mouseover", mouseovered)
     .on("mouseout", mouseouted);
 
+  // data join
+
+  // update
+
+  // enter
+
+  // enter + update
+
+  // exit
   node = node
       .data(nodes.filter(function(n) { return !n.children; }))
       .enter().append("text")
